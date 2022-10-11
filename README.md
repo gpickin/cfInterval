@@ -53,17 +53,17 @@ initializes the TimeSpan to 3 hours, 4 minutes, 10 seconds and 0 milliseconds.
 You can initialize a new TimeSpan by calling one of these functions:
 
 ```javascript
-TimeSpan.FromSeconds;
-TimeSpan.FromMinutes;
-TimeSpan.FromHours;
-TimeSpan.FromDays;
-TimeSpan.FromDates; // this behaves differently, see below
+TimeSpan::FromSeconds;
+TimeSpan::FromMinutes;
+TimeSpan::FromHours;
+TimeSpan::FromDays;
+TimeSpan::FromDates; // this behaves differently, see below
 ```
 
 these take a single numeric parameter and create a new TimeSpan.
 
 ```javascript
-var ts = TimeSpan.FromSeconds(45);
+var ts = TimeSpan::FromSeconds(45);
 ```
 
 is equivalent to
@@ -76,7 +76,7 @@ If the parameter is invalid/not a number, it will just be treated as 0
 but not throw any error.
 
 ```javascript
-TimeSpan.FromDates;
+TimeSpan::FromDates;
 ```
 
 This is different as it takes two dates. The TimeSpan will be the
@@ -91,8 +91,8 @@ Example:
 ```javascript
 var date1 = new Date(2010, 3, 1, 10, 10, 5, 0);
 var date2 = new Date(2010, 3, 1, 10, 10, 10, 0);
-var ts = TimeSpan.FromDates(date2, date1);
-var ts2 = TimeSpan.FromDates(date2, date1, true);
+var ts = TimeSpan::FromDates(date2, date1);
+var ts2 = TimeSpan::FromDates(date2, date1, true);
 alert(ts.totalSeconds()); // -5, because we put the later date first
 alert(ts2.totalSeconds()); // 5, because we passed true as third parameter
 ```
@@ -150,8 +150,8 @@ equals;
 To add/subtract the other TimeSpan to the current one:
 
 ```javascript
-var ts = TimeSpan.FromSeconds(30);
-var ts2 = TimeSpan.FromMinutes(2);
+var ts = TimeSpan::FromSeconds(30);
+var ts2 = TimeSpan::FromMinutes(2);
 ts.add(ts2);
 // ts is now a TimeSpan of 2 Minutes, 30 Seconds
 // ts2 is unchanged
@@ -160,8 +160,8 @@ ts.add(ts2);
 To check if two TimeSpans have the same value:
 
 ```javascript
-var ts = TimeSpan.FromSeconds(30);
-var ts2 = TimeSpan.FromSeconds(30);
+var ts = TimeSpan::FromSeconds(30);
+var ts2 = TimeSpan::FromSeconds(30);
 var eq = ts.equals(ts2); // true
 ts2.addSeconds(1);
 var eq2 = ts.equals(ts2); // false
@@ -191,7 +191,7 @@ an Integer.
 Example:
 
 ```javascript
-var ts = TimeSpan.FromSeconds(90);
+var ts = TimeSpan::FromSeconds(90);
 alert(ts.totalMilliseconds()); // 90000
 alert(ts.totalSeconds()); // 90
 alert(ts.totalMinutes()); // 1.5
@@ -214,7 +214,7 @@ These functions return a component of the TimeSpan that could be used to
 represent a clock. For example:
 
 ```javascript
-var ts = TimeSpan.FromSeconds(90);
+var ts = TimeSpan::FromSeconds(90);
 alert(ts.seconds()); // 30
 alert(ts.minutes()); // 1
 ```
@@ -224,7 +224,7 @@ Basically these values never overflow - `seconds` will only return 0 to
 functions automatically round down the result:
 
 ```javascript
-var ts = TimeSpan.FromDays(2);
+var ts = TimeSpan::FromDays(2);
 ts.addHours(12);
 alert(ts.days()); // 2
 alert(ts.hours()); // 12
