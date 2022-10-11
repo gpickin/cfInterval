@@ -1,0 +1,33 @@
+{
+  "name": "cfInterval",
+  "version": "1.0.0",
+  "author": "Gavin Pickin, Scott Steinbeck",
+  "location": "forgeboxStorage",
+  "homepage": "https://github.com/gpickin/cfInterval",
+  "documentation": "https://github.com/gpickin/cfInterval",
+  "repository": {
+    "type": "git",
+    "URL": "https://github.com/gpickin/cfInterval"
+  },
+  "bugs": "https://github.com/gpickin/cfInterval/issues",
+  "slug": "cfInterval",
+  "shortDescription": "Human friendly helpers for working with intervals / timespans",
+  "description": "Human friendly helpers for working with intervals / timespans. Built on top of a port of the JavaScript TimeSpan library (Timespan.js), inspired by .net's System.TimeSpan and System.DateTime",
+  "type": "modules",
+  "devDependencies": {
+    "testbox": "^4.4.0",
+    "coldbox": "^6.5.2+37"
+  },
+  "installPaths": {
+    "testbox": "testbox/",
+    "coldbox": "tests/resources/app/coldbox/"
+  },
+  "scripts": {
+    "format": "cfformat run models/**/*.cfc,tests/specs/**/*.cfc --overwrite",
+    "format:check": "cfformat check models/**/*.cfc,tests/specs/**/*.cfc"
+  },
+  "ignore": ["**/.*", "test", "tests"],
+  "testbox": {
+    "runner": "http://127.0.0.1:56888/tests/runner.cfm"
+  }
+}
