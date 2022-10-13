@@ -26,21 +26,11 @@ component name="TimeSpan" {
         // this.msecs = 0;
 
         // Constructor Logic
-        if ( isNumeric( days ) ) {
-            this.msecs += ( days * msecPerDay );
-        }
-        if ( isNumeric( hours ) ) {
-            this.msecs += ( hours * msecPerHour );
-        }
-        if ( isNumeric( minutes ) ) {
-            this.msecs += ( minutes * msecPerMinute );
-        }
-        if ( isNumeric( seconds ) ) {
-            this.msecs += ( seconds * msecPerSecond );
-        }
-        if ( isNumeric( milliseconds ) ) {
-            this.msecs += milliseconds;
-        }
+        this.msecs += ( days * msecPerDay );
+        this.msecs += ( hours * msecPerHour );
+        this.msecs += ( minutes * msecPerMinute );
+        this.msecs += ( seconds * msecPerSecond );
+        this.msecs += milliseconds;
 
         return this;
     };
@@ -48,97 +38,58 @@ component name="TimeSpan" {
 
     // Addition Functions
     public function addMilliseconds( numeric milliseconds = 0 ) {
-        if ( !isNumeric( milliseconds ) ) {
-            return;
-        }
         this.msecs += milliseconds;
         return this;
     };
     public function addSeconds( numeric seconds = 0 ) {
-        if ( !isNumeric( seconds ) ) {
-            return;
-        }
         this.msecs += ( seconds * msecPerSecond );
         return this;
     };
     public function addMinutes( numeric minutes = 0 ) {
-        if ( !isNumeric( minutes ) ) {
-            return;
-        }
         this.msecs += ( minutes * msecPerMinute );
         return this;
     };
     public function addHours( numeric hours = 0 ) {
-        if ( !isNumeric( hours ) ) {
-            return;
-        }
         this.msecs += ( hours * msecPerHour );
         return this;
     };
     public function addDays( numeric days = 0 ) {
-        if ( !isNumeric( days ) ) {
-            return;
-        }
-        this.msecs += ( days * msecPerDay );
+         this.msecs += ( days * msecPerDay );
         return this;
     };
 
     // Subtraction Functions
     public function subtractMilliseconds( numeric milliseconds = 0 ) {
-        if ( !isNumeric( milliseconds ) ) {
-            return;
-        }
         this.msecs -= milliseconds;
         return this;
     };
     public function subtractSeconds( numeric seconds = 0 ) {
-        if ( !isNumeric( seconds ) ) {
-            return;
-        }
         this.msecs -= ( seconds * msecPerSecond );
         return this;
     };
     public function subtractMinutes( numeric minutes = 0 ) {
-        if ( !isNumeric( minutes ) ) {
-            return;
-        }
         this.msecs -= ( minutes * msecPerMinute );
         return this;
     };
     public function subtractHours( numeric hours = 0 ) {
-        if ( !isNumeric( hours ) ) {
-            return;
-        }
         this.msecs -= ( hours * msecPerHour );
         return this;
     };
     public function subtractDays( numeric days = 0 ) {
-        if ( !isNumeric( days ) ) {
-            return;
-        }
         this.msecs -= ( days * msecPerDay );
         return this;
     };
 
     // Functions to interact with other TimeSpans
     this.isTimeSpan = true;
-    public function add( Timespan otherTimeSpan = 0 ) {
-        if ( !otherTimeSpan.isTimeSpan ) {
-            return;
-        }
+    public function add( required timespan otherTimeSpan = 0 ) {
         this.msecs += otherTimeSpan.totalMilliseconds();
     };
-    public function subtract( Timespan otherTimeSpan = 0 ) {
-        if ( !otherTimeSpan.isTimeSpan ) {
-            return;
-        }
+    public function subtract( required timespan otherTimeSpan = 0 ) {
         this.msecs -= otherTimeSpan.totalMilliseconds();
     };
-    public function equals( Timespan otherTimeSpan = 0 ) {
-        if ( !otherTimeSpan.isTimeSpan ) {
-            return;
-        }
-        return this.msecs === otherTimeSpan.totalMilliseconds();
+    public function equals( required timespan otherTimeSpan = 0 ) {
+        return this.msecs == otherTimeSpan.totalMilliseconds();
     };
 
     // Getters
@@ -248,8 +199,8 @@ component name="TimeSpan" {
         return new Timespan( 0, 0, 0, 0, days );
     };
     public static function FromDates( date firstDate = now(), date secondDate = now(), boolean forcePositive = false ) {
-        var differenceMsecs = ( secondDate - firstDate ) * 1000;
-        if ( forcePositive === true ) {
+        var differenceMsecs = dateDiff('s',secondDate,firstDate) * 1000;
+        if ( forcePositive == true ) {
             differenceMsecs = abs( differenceMsecs );
         }
         return new Timespan( differenceMsecs, 0, 0, 0, 0 );
@@ -257,7 +208,7 @@ component name="TimeSpan" {
     public static function Parse( timespanText ) {
         var tokens = listToArray( timespanText, ":" );
         var days = listToArray( tokens[ 1 ], "." );
-        if ( days.length == 2 )
+        if ( days.len() == 2 )
             return init(
                 0,
                 tokens[ 3 ],
